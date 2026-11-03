@@ -3,7 +3,7 @@ import { Navigate, Route, Routes, Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import _ from "lodash";
 import { AddEditPost, PostDetail, Posts } from "./pages";
-
+import Produ from "./pages/Produ";
 const photos = [
   { id: 1, title: "image1", price: 25 },
   { id: 2, title: "image2", price: 40 },
@@ -48,6 +48,7 @@ function App() {
             <Route path="/posts/:id" element={<PostDetail />} />
             <Route path="/add-post" element={<AddEditPost />} />
             <Route path="/edit-post/:id" element={<AddEditPost />} />
+            <Route path="/produ/:id" element={<Produ></Produ>} />
           </Routes>
         </PageBox>
       </Main>

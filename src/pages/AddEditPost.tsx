@@ -12,6 +12,8 @@ import "react-quill-new/dist/quill.snow.css";
 import { NewPostFormValues } from "../schemas/add-post-schema";
 import { uploadImage } from "../services/posts-services";
 
+import { Link } from "react-router-dom";
+
 const AddEditPost = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -31,6 +33,8 @@ const AddEditPost = () => {
     },
     resolver: yupResolver(newPostSchema),
   });
+  console.log(errors);
+  console.log(isSubmitting);
   const post = getPostById(id || "");
   // useEffect(() => {
   //   if (id) {
@@ -94,7 +98,7 @@ const AddEditPost = () => {
         },
       },
     }),
-    []
+    [],
   );
 
   const onSubmit: SubmitHandler<NewPostFormValues> = async (data) => {
@@ -121,125 +125,76 @@ const AddEditPost = () => {
       console.error(error);
     }
   };
+
+  const ArrImages = [
+    {
+      id: 1,
+      url: "ddd",
+      description: "hi",
+      inStock: true,
+      name: "ფოტო 1",
+      image: "https://seo-testcode.vercel.app/images.jpg",
+      author: "უცნობი",
+      resolution: 1400,
+      price: 10,
+    },
+    {
+      id: 2,
+      url: "ddd",
+      inStock: true,
+      description: "hi",
+      name: "ფოტო 2",
+      image: "https://seo-testcode.vercel.app/York.webp",
+      author: "უცნობი",
+      resolution: 1400,
+      price: 10,
+    },
+    {
+      id: 3,
+      inStock: true,
+      url: "ddd",
+      description: "hi",
+      name: "ფოტო 3",
+      image: "https://seo-testcode.vercel.app/blackpanther.jpg",
+      author: "უცნობი",
+      resolution: 1400,
+      price: 10,
+    },
+    {
+      id: 4,
+      url: "ddd",
+      inStock: true,
+      description: "hi",
+      name: "ფოტო 4",
+      image: "https://seo-testcode.vercel.app/flash.jpg",
+      author: "უცნობი",
+      resolution: 1400,
+      price: 10,
+    },
+  ];
+
   return (
-    <div>
+    <>
       <div>
-      <div>
-        <img src="/images.jpg" alt="" />
-     <h3>ფოტო 1</h3>
-        <p className="author">ავტორი: უცნობი</p>
-        <p className="resolution">1400</p>
+        {ArrImages.map((item) => (
+          <Link to={`/produ/${item.id}`}>
+            <div key={item.id}>
+              <img src={item.image} alt={item.name} />
 
-        
-          <strong>10 ₾</strong>
-          <button type="button">🛒</button>
-        
-        </div>
-            <div>
-           <img src="/York.webp" alt="" />
-     <h3>ფოტო 2</h3>
-        <p className="author">ავტორი: უცნობი</p>
-        <p className="resolution">1400</p>
+              <h3>{item.name}</h3>
 
-        
-          <strong>10 ₾</strong>
-          <button type="button">🛒</button>
-        
-        </div>
-            <div>
-          <img src="/blackpanther.jpg" alt="" />
-     <h3>ფოტო 3</h3>
-        <p className="author">ავტორი: უცნობი</p>
-        <p className="resolution">1400</p>
+              <p className="author">ავტორი: {item.author}</p>
 
-        
-          <strong>10 ₾</strong>
-          <button type="button">🛒</button>
-        
-        </div>
-            <div>
-           <img src="/flash.jpg" alt="" />
-     <h3>ფოტო 4</h3>
-        <p className="author">ავტორი: უცნობი</p>
-        <p className="resolution">1400</p>
+              <p className="resolution">{item.resolution}</p>
 
-        
-          <strong>10 ₾</strong>
-          <button type="button">🛒</button>
-        
-        </div>
+              <strong>{item.price} ₾</strong>
+
+              <button type="button">🛒</button>
+            </div>
+          </Link>
+        ))}
       </div>
-  
-   
-  
-    <FormElement onSubmit={handleSubmit(onSubmit)}>
-      <CloseIcon onClick={() => navigate("/posts")} />
-      <Title>{id ? "სტატიის რედაქტირება" : "სტატიის დამატება"}</Title>
-      <LanguageWrapper>
-        <LanguageBox>
-          <StyledLabel htmlFor="title-geo">სათაური (ქართული)</StyledLabel>
-          <StyledInput type="text" id="title-geo" {...register("title")} />
-          <Error>
-            {errors.title && (
-              <ErrorWrapper>
-                <ErrorIcon /> {errors.title.message}
-              </ErrorWrapper>
-            )}
-          </Error>
-        </LanguageBox>
-      </LanguageWrapper>
-      {/* {id && post && !activeGalleryItem && (
-        <StyledPoster src={import.meta.env.VITE_API_URL + post.poster} />
-      )}
-      {activeGalleryItem && (
-        <StyledPoster
-          src={import.meta.env.VITE_API_URL + activeGalleryItem.url}
-        />
-      )} */}
-      {uploadedFile && <StyledPoster src={URL.createObjectURL(uploadedFile)} />}
-      <h6>პოსტერი:</h6>
-      <>
-        <StyledLabel htmlFor="file">პოსტერი</StyledLabel>
-        <StyledInput
-          type="file"
-          id="file"
-          ref={fileRef}
-          onChange={handleFileChange}
-        />
-      </>
-
-      <StyledLabel htmlFor="content-geo">სტატია (ქართული)</StyledLabel>
-      <Controller
-        name="content"
-        control={control}
-        render={({ field }) => (
-          <StyledQuill
-            id="content-geo"
-            ref={quillGeoRef}
-            modules={modules}
-            theme="snow"
-            value={field.value}
-            onChange={field.onChange}
-          />
-        )}
-      />
-      <Error style={{ marginTop: "50px" }}>
-        {errors.content && (
-          <ErrorWrapper>
-            <ErrorIcon /> {errors.content.message}
-          </ErrorWrapper>
-        )}
-      </Error>
-
-      <SubmitBtn type="submit">
-        {isSubmitting
-          ? "მუშავდება..."
-          : id
-          ? "ცვლილებების შენახვა"
-          : "სტატიის დამატება"}
-      </SubmitBtn>
-    </FormElement>
-    </div>
+    </>
   );
 };
 
