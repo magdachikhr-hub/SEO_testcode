@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { SubmitHandler, useForm, Controller } from "react-hook-form";
-import { CloseIcon, ErrorIcon } from "../svg";
+import { SubmitHandler, useForm } from "react-hook-form";
+
 import { useNavigate, useParams } from "react-router-dom";
 import { useMemo, useRef, useState } from "react";
 import { usePostsStore } from "../store";
@@ -19,7 +19,6 @@ const AddEditPost = () => {
   const navigate = useNavigate();
   const { addPost, getPostById, changePost } = usePostsStore();
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
-
   const {
     register,
     handleSubmit,
@@ -33,6 +32,9 @@ const AddEditPost = () => {
     },
     resolver: yupResolver(newPostSchema),
   });
+  console.log(control);
+  console.log(register);
+  console.log(handleSubmit);
   console.log(errors);
   console.log(isSubmitting);
   const post = getPostById(id || "");
@@ -56,6 +58,7 @@ const AddEditPost = () => {
       setUploadedFile(file);
     }
   };
+  console.log(handleFileChange);
   const quillGeoRef = useRef<ReactQuill | null>(null);
 
   const handleImageUpload = (ref: ReactQuill | null) => {
@@ -103,7 +106,7 @@ const AddEditPost = () => {
 
   const onSubmit: SubmitHandler<NewPostFormValues> = async (data) => {
     let poster: File | string | undefined;
-
+    console.log(onSubmit);
     if (uploadedFile) {
       poster = uploadedFile;
     } else if (post) {
