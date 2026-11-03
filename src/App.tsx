@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Navigate, Route, Routes,Link } from "react-router-dom";
+import { Navigate, Route, Routes, Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import _ from "lodash"
+import _ from "lodash";
 import { AddEditPost, PostDetail, Posts } from "./pages";
 
 const photos = [
@@ -10,26 +10,37 @@ const photos = [
   { id: 3, title: "image3", price: 15 },
 ];
 
-const total = _.sumBy(photos, "price");     
-const cheapest = _.minBy(photos, "price");   
+const total = _.sumBy(photos, "price");
+const cheapest = _.minBy(photos, "price");
 const sorted = _.orderBy(photos, ["price"], ["desc"]);
 
+console.log(total);
+console.log(cheapest);
+console.log(sorted);
 
 function App() {
   return (
     <>
       <ToastContainer />
-      <div className="header" style={{height:'90px'}}>  this is header
-        <div className="navigation" style={{display:'flex', gap:'30px'}}>
-          <Link to={'/posts'}><li>posts</li></Link>
-          <Link to={'/posts/:id'}><li>post</li></Link>
-          <Link to={'/add-post'}><li>add-post</li></Link>
-          <Link to={'/edit-post'}><li>edit-post</li></Link>
-
+      <div className="header" style={{ height: "90px" }}>
+        {" "}
+        this is header
+        <div className="navigation" style={{ display: "flex", gap: "30px" }}>
+          <Link to={"/posts"}>
+            <li>posts</li>
+          </Link>
+          <Link to={"/posts/:id"}>
+            <li>post</li>
+          </Link>
+          <Link to={"/add-post"}>
+            <li>add-post</li>
+          </Link>
+          <Link to={"/edit-post"}>
+            <li>edit-post</li>
+          </Link>
         </div>
       </div>
       <Main>
-        
         <PageBox>
           <Routes>
             <Route path="/" element={<Navigate to="/posts" />} />
