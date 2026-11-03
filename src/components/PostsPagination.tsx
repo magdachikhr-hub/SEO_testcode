@@ -1,7 +1,7 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 import { PostType } from "../types";
-import parse from "html-react-parser";
+// import parse from "html-react-parser";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { usePostsStore } from "../store";
@@ -13,11 +13,11 @@ type PageClickEvent = {
 const Items: React.FC<{ currentPosts: PostType[] }> = ({ currentPosts }) => {
   return (
     <>
-      {currentPosts.map((post) => (
+      {/* {currentPosts.map((post) => (
         <PostElement to={"/posts/" + post.id} key={post.id}>
           {parse(post.title)}
         </PostElement>
-      ))}
+      ))} */}
     </>
   );
 };
