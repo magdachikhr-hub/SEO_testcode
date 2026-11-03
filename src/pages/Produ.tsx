@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import ImagesJsonLd from "../utils/ImagesJsonLd";
 import Seo from "../utils/Seo";
 import { useParams } from "react-router-dom";

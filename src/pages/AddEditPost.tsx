@@ -103,7 +103,7 @@ const AddEditPost = () => {
     }),
     [],
   );
-
+  console.log(modules);
   const onSubmit: SubmitHandler<NewPostFormValues> = async (data) => {
     let poster: File | string | undefined;
     console.log(onSubmit);
@@ -208,14 +208,15 @@ const FormElement = styled.form`
   display: flex;
   flex-direction: column;
 `;
-
+console.log(FormElement);
 const Title = styled.h2`
   margin: auto;
   text-align: center;
   margin-bottom: 20px;
 `;
+console.log(Title);
 const StyledLabel = styled.label``;
-
+console.log(StyledLabel);
 const StyledInput = styled.input`
   height: 44px;
   width: 50%;
@@ -227,6 +228,7 @@ const StyledInput = styled.input`
   }
 `;
 
+console.log(StyledInput);
 const StyledQuill = styled(ReactQuill)`
   width: 100%;
   height: 400px;
@@ -235,6 +237,7 @@ const StyledQuill = styled(ReactQuill)`
   border-radius: 8px;
   margin-top: 10px;
 `;
+console.log(StyledQuill);
 const SubmitBtn = styled.button`
   padding: 10px 20px;
   background-color: #15be15;
@@ -244,7 +247,7 @@ const SubmitBtn = styled.button`
   margin-top: 50px;
   border-radius: 8px;
 `;
-
+console.log(SubmitBtn);
 const Error = styled.div`
   width: 100%;
   margin-top: 5px;
@@ -253,28 +256,29 @@ const Error = styled.div`
   font-size: 12px;
   height: 20px;
 `;
-
+console.log(Error);
 const ErrorWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
 `;
-
+console.log(ErrorWrapper);
 const LanguageWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
   width: 100%;
 `;
-
+console.log(LanguageWrapper);
 const LanguageBox = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
-
+console.log(LanguageBox);
 const StyledPoster = styled.img`
   width: 300px;
   height: auto;
   margin: auto;
 `;
+console.log(StyledPoster);
