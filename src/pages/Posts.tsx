@@ -3,12 +3,12 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import { usePostsStore } from "../store";
-import PaginatedPosts from "../components/PostsPagination";
+// import PaginatedPosts from "../components/PostsPagination";
 
 const itemsPerPage = 10;
 const Posts = () => {
   const { posts, fetchPosts } = usePostsStore();
-
+  console.log(posts);
   const [searchParams] = useSearchParams();
   const page = searchParams.get("page");
   const navigate = useNavigate();
@@ -39,16 +39,14 @@ const Posts = () => {
   }, [fetchPosts, page]);
   return (
     <>
-    
       <Title>სტატიები</Title>
-      <PaginatedPosts posts={posts} />
-      
-      <SubmitBtn to="/add-post">ახალი სტატიის დამატება</SubmitBtn>
-     <h4>products </h4>
-     <img src="/image.png" alt="" />
-     <img src="/image-2.png" alt="" />
-     <button style={{backgroundColor: 'grey'}}>✅</button>
+      {/* <PaginatedPosts posts={posts} /> */}
 
+      <SubmitBtn to="/add-post">ახალი სტატიის დამატება</SubmitBtn>
+      <h4>products </h4>
+      <img src="/image.png" alt="" />
+      <img src="/image-2.png" alt="" />
+      <button style={{ backgroundColor: "grey" }}>✅</button>
     </>
   );
 };
